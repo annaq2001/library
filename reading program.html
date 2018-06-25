@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>reading program</title>
+    <style>
+    div {
+      margin: 0.5em 0;
+    }
+    table {
+      text-transform: capitalize;
+    }
+    td {
+      /* padding: 0.5em 1em 0.5em 0; */
+      /* font-size: 11px; */
+    }
+    </style>
+  </head>
+  <body style="padding: 3em;">
+    <div>first: <input type="text" id="first" /></div>
+    <div>last: <input type="text" id="last" /></div>
+    <div>age: <input type="text" id="age" /></div>
+    <div>grade: <input type="text" id="grade" /></div>
+    <div>school: <input type="text" id="school" /> <select><option value="Dixie">Dixie</option><option value="Mary E Silveira">Mary E Silveira</option><option value="Vallecito">Vallecito</option><option value="Venetia Valley">Venetia Valley</option><!--<option value="Glenwood">Glenwood</option>--><option value="Miller Creek">Miller Creek</option></select></div>
+    <div>card #: <input type="text" id="card" /></div>
+    <div>notes: <input type="text" id="notes" /></div>
+    <div><button>next</button></div>
+    <table style="margin-top: 1em;"><tbody></tbody></table>
+    <button>copy table</button><button>clear table</button>
+    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script> -->
+    <script>
+    function selectElementContents(el) {
+      var body = document.body, range, sel;
+      if (document.createRange && window.getSelection) {
+        range = document.createRange();
+        sel = window.getSelection();
+        sel.removeAllRanges();
+        try {
+          range.selectNodeContents(el);
+          sel.addRange(range);
+        } catch (e) {
+          range.selectNode(el);
+          sel.addRange(range);
+        }
+      } else if (body.createTextRange) {
+        range = body.createTextRange();
+        range.moveToElementText(el);
+        range.select();
+      }
+    }
+    document.getElementsByTagName('button')[0].onclick = function(){
+      let row = document.createElement('tr'),
+          last = document.createElement('td'),
+          first = document.createElement('td'),
+          age = document.createElement('td'),
+          grade = document.createElement('td'),
+          school = document.createElement('td'),
+          card = document.createElement('td'),
+          notes = document.createElement('td');
+      last.innerHTML = document.getElementById('last').value;
+      first.innerHTML = document.getElementById('first').value;
+      age.innerHTML = document.getElementById('age').value;
+      grade.innerHTML = document.getElementById('grade').value;
+      if (document.getElementById('school').value == " ") school.innerHTML = "";
+      else if (document.getElementById('school').value != "") school.innerHTML = document.getElementById('school').value;
+      else school.innerHTML = document.getElementsByTagName('select')[0].value;
+      if (document.getElementById('card').value != "") card.innerHTML = '2 1111 ' + document.getElementById('card').value;
+      notes.innerHTML = document.getElementById('notes').value;
+      last.contentEditable = true;
+      first.contentEditable = true;
+      age.contentEditable = true;
+      grade.contentEditable = true;
+      school.contentEditable = true;
+      card.contentEditable = true;
+      notes.contentEditable = true;
+      row.appendChild(last);
+      row.appendChild(first);
+      row.appendChild(age);
+      row.appendChild(grade);
+      row.appendChild(school);
+      row.appendChild(card);
+      row.appendChild(notes);
+      document.getElementsByTagName('tbody')[0].appendChild(row);
+      document.getElementById('first').focus();
+      for (let i = 0; i < document.getElementsByTagName('input').length; i++)
+      document.getElementsByTagName('input')[i].value = "";
+      document.getElementsByTagName('select')[0].value = "Dixie";
+    };
+    document.getElementsByTagName('button')[1].onclick = function(){
+      selectElementContents(document.getElementsByTagName('table')[0]);
+      document.execCommand('copy');
+    };
+    document.getElementsByTagName('button')[2].onclick = function(){
+      document.getElementsByTagName('tbody')[0].innerHTML = "";
+    };
+    </script>
+  </body>
+</html>
