@@ -10,7 +10,7 @@
     padding: 3em 4em;
   }
   div {
-    margin: 1em 0;
+    margin: 1.25em 0;
     max-width: 50%;
   }
   div#instructions {
@@ -21,7 +21,7 @@
   input, select {
     margin-left: 0.5em;
   }
-  select, input#card {
+  select, input#card, input#notes {
     margin-bottom: 0.5em;
   }
   span {
@@ -48,7 +48,7 @@
   <div>grade: <input type="text" id="grade" /></div>
   <div>school: <input type="text" id="school" /> <select><option value="Dixie">Dixie</option><option value="Mary E Silveira">Mary E Silveira</option><option value="Vallecito">Vallecito</option><option value="Venetia Valley">Venetia Valley</option><option value="Miller Creek">Miller Creek</option></select><br><span>dropdown options: dixie, mary e silveira, vallecito, venetia valley, miller creek<br>if there is no school listed, type a space into the box <br>if using one of the dropdown schools, leave the box empty</span></div>
   <div>card #: <input type="text" id="card" /><br><span>do not include the <b>2 1111</b> at the beginning, it will be added automatically</span></div>
-  <div>notes: <input type="text" id="notes" /></div>
+  <div>notes: <input type="text" id="notes" /><br /><span>notes it automatically adds: <br />no last name, no card #, card # is shorter/longer than usual</span></div>
   <div><button>next</button></div>
   <table><tbody></tbody></table>
   <button>copy table</button><button>clear table</button>
