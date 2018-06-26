@@ -94,7 +94,12 @@
     if (document.getElementById('school').value == " ") school.innerHTML = "";
     else if (document.getElementById('school').value != "") school.innerHTML = document.getElementById('school').value;
     else school.innerHTML = document.getElementsByTagName('select')[0].value;
-    if (document.getElementById('card').value != "") card.innerHTML = '2 1111 ' + document.getElementById('card').value;
+    if (document.getElementById('card').value != "") {
+      if (document.getElementById('card').value.indexOf(' ') == -1) {
+        document.getElementById('card').value = document.getElementById('card').value.slice(0, 5) + ' ' + document.getElementById('card').value.slice(5, 9);
+      }
+      card.innerHTML = '2 1111 ' + document.getElementById('card').value;
+    }
     if (document.getElementById('last').value == "") notes.innerHTML = "no last name";
     if (document.getElementById('card').value == "") {
       console.log(notes.innerHTML);
