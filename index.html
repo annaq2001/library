@@ -32,6 +32,9 @@
     text-transform: capitalize;
     margin: 2em 0;
   }
+  td:nth-child(7) {
+    text-transform: lowercase;
+  }
   button, input, select {
     font-family: 'Karla', sans-serif;
   }
@@ -69,7 +72,11 @@
       range.select();
     }
   }
+
+  // "next" button clicked
   document.getElementsByTagName('button')[0].onclick = function(){
+
+    // create each table row and cell
     let row = document.createElement('tr'),
     last = document.createElement('td'),
     first = document.createElement('td'),
@@ -78,6 +85,8 @@
     school = document.createElement('td'),
     card = document.createElement('td'),
     notes = document.createElement('td');
+
+    // fill each cell
     last.innerHTML = document.getElementById('last').value;
     first.innerHTML = document.getElementById('first').value;
     age.innerHTML = document.getElementById('age').value;
@@ -86,7 +95,26 @@
     else if (document.getElementById('school').value != "") school.innerHTML = document.getElementById('school').value;
     else school.innerHTML = document.getElementsByTagName('select')[0].value;
     if (document.getElementById('card').value != "") card.innerHTML = '2 1111 ' + document.getElementById('card').value;
-    notes.innerHTML = document.getElementById('notes').value;
+    if (document.getElementById('last').value == "") notes.innerHTML = "no last name";
+    if (document.getElementById('card').value == "") {
+      console.log(notes.innerHTML);
+      if (notes.innerHTML == "") notes.innerHTML = "no card #";
+      else notes.innerHTML += ", no card #";
+    }
+    else if (document.getElementById('card').value.length > 10) {
+      if (notes.innerHTML == "") notes.innerHTML = "card # is longer than usual";
+      else notes.innerHTML += ", card # is longer than usual";
+    }
+    else if (document.getElementById('card').value.length < 10) {
+      if (notes.innerHTML == "") notes.innerHTML = "card # is shorter than usual";
+      else notes.innerHTML += ", card # is shorter than usual";
+    }
+    if (document.getElementById('notes').value != "") {
+      if (notes.innerHTML != "") notes.innerHTML = document.getElementById('notes').value + ', ' + notes.innerHTML;
+      else notes.innerHTML = document.getElementById('notes').value;
+    }
+
+    // make each cell editable
     last.contentEditable = true;
     first.contentEditable = true;
     age.contentEditable = true;
@@ -94,6 +122,8 @@
     school.contentEditable = true;
     card.contentEditable = true;
     notes.contentEditable = true;
+
+    // add each cell to the row
     row.appendChild(last);
     row.appendChild(first);
     row.appendChild(age);
@@ -101,16 +131,25 @@
     row.appendChild(school);
     row.appendChild(card);
     row.appendChild(notes);
+
+    // add row to table
     document.getElementsByTagName('tbody')[0].appendChild(row);
+
+    // move cursor to "first name" input
     document.getElementById('first').focus();
-    for (let i = 0; i < document.getElementsByTagName('input').length; i++)
-    document.getElementsByTagName('input')[i].value = "";
+
+    // reset inputs
+    for (let i = 0; i < document.getElementsByTagName('input').length; i++) document.getElementsByTagName('input')[i].value = "";
     document.getElementsByTagName('select')[0].value = "Dixie";
   };
+
+  // "copy table" button clicked
   document.getElementsByTagName('button')[1].onclick = function(){
     selectElementContents(document.getElementsByTagName('table')[0]);
     document.execCommand('copy');
   };
+
+  // "clear table" button clicked
   document.getElementsByTagName('button')[2].onclick = function(){
     document.getElementsByTagName('tbody')[0].innerHTML = "";
   };
