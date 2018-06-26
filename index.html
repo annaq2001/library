@@ -96,7 +96,7 @@
     else school.innerHTML = document.getElementsByTagName('select')[0].value;
     if (document.getElementById('card').value != "") {
       if (document.getElementById('card').value.indexOf(' ') == -1) {
-        document.getElementById('card').value = document.getElementById('card').value.slice(0, 5) + ' ' + document.getElementById('card').value.slice(5, 9);
+        document.getElementById('card').value = document.getElementById('card').value.slice(0, 5) + ' ' + document.getElementById('card').value.slice(5);
       }
       card.innerHTML = '2 1111 ' + document.getElementById('card').value;
     }
